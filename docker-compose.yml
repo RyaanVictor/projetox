@@ -1,0 +1,29 @@
+version: "3.1"
+services:
+  wordpress:
+    image: wordpress
+    restart: always
+    container_name: "wpsite"
+    ports:
+      - 5050:80
+    volumes:
+      - ~/projetox/wpsite:/var/www/html
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: senac
+      WORDPRESS_DB_PASSWORD: 12345@senac
+      WORDPRESS_DB_NAME: projetodb
+
+  db:
+    image: mysql:8.0
+    restart: always
+    container_name: "wpdados"
+    environment:
+      MYSQL_DATABASE: projetodb
+      MYSQL_USER: senac
+      MYSQL_PASSWORD: 12345@senac
+      MYSQL_ROOT_PASSWORD: 12345@senac
+    ports:
+      - 4040:3306
+    volumes:
+      - ~/projetox/wpdados:/var/lib/mysql
